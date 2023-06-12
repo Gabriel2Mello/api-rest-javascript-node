@@ -1,7 +1,7 @@
 class HomeController {
-  index(req, res) {
+  async index(req, res) {
     res.json({
-      "check": true
+      check: true
     });
   }
 }
