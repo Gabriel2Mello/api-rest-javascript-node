@@ -4,13 +4,13 @@ import User from '../models/User';
 export default async (req, res, next) => {
   const { authorization } = req.headers;
 
-  if(!authorization) {
+  if (!authorization) {
     return res.status(401).json({
-      errors: [ 'Login required.' ]
+      errors: ['Login required.'],
     });
   }
 
-  const [ , token ] = authorization.split(' ');
+  const [, token] = authorization.split(' ');
   try {
     const userData = jwt.verify(token, process.env.TOKEN_SECRET);
     const { id, email } = userData;
@@ -18,22 +18,22 @@ export default async (req, res, next) => {
     const user = await User.findOne({
       where: {
         id,
-        email
-      }
+        email,
+      },
     });
 
-    if(!user) {
+    if (!user) {
       return res.status(401).json({
-        errors: [ 'User invalid.' ]
-      })
-    };
+        errors: ['User invalid.'],
+      });
+    }
 
     req.userId = id;
     req.userEmail = email;
     return next();
   } catch (e) {
     return res.status(401).json({
-      errors: [ 'Token invalid.' ]
+      errors: ['Token invalid.'],
     });
   }
 };

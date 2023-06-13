@@ -2,9 +2,9 @@ import { Router } from 'express';
 import userController from '../controllers/UserController';
 import loginRequired from '../middlewares/loginRequired';
 
-const router = new Router;
+const router = new Router();
 
-router.get('/',  userController.getAll);
+router.get('/', userController.getAll);
 router.get('/:id', userController.get);
 
 router.post('/', userController.create);

@@ -8,10 +8,10 @@ module.exports = {
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE,
   define: {
-    timestamps: true
+    timestamps: true,
   },
   dialectOptions: {
-    timezone: 'America/Sao_Paulo'
+    timezone: 'America/Sao_Paulo',
   },
-  timezone: 'America/Sao_Paulo'
+  timezone: 'America/Sao_Paulo',
 };

@@ -3,7 +3,7 @@ import studentController from '../controllers/StudentController';
 
 import loginRequired from '../middlewares/loginRequired';
 
-const router = new Router;
+const router = new Router();
 
 router.get('/', studentController.getAll);
 router.get('/:id', studentController.get);

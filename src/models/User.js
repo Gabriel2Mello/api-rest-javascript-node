@@ -10,18 +10,18 @@ export default class User extends Model {
         validate: {
           len: {
             args: [3, 60],
-            msg: 'Name need to have between 3 and 60 characters.'
-          }
-        }
+            msg: 'Name need to have between 3 and 60 characters.',
+          },
+        },
       },
       email: {
         type: Sequelize.STRING,
         defaultValue: '',
         validate: {
           isEmail: {
-            msg: 'Email invalid.'
-          }
-        }
+            msg: 'Email invalid.',
+          },
+        },
       },
       passwordHash: {
         type: Sequelize.STRING,
@@ -33,23 +33,23 @@ export default class User extends Model {
         validate: {
           len: {
             args: [6, 50],
-            msg: 'Password need to have between 6 and 50 characters.'
-          }
-        }
-      }
+            msg: 'Password need to have between 6 and 50 characters.',
+          },
+        },
+      },
     }, {
-      sequelize
+      sequelize,
     });
 
     this.addHook('beforeSave', async (user) => {
-      if(!user.password) return;
+      if (!user.password) return;
       user.passwordHash = await bcryptjs.hash(user.password, 8);
     });
 
     return this;
   }
 
-  passwordIsValid(password) {
+  async passwordIsValid(password) {
     return bcryptjs.compare(password, this.passwordHash);
   }
 }

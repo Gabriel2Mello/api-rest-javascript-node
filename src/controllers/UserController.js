@@ -9,18 +9,21 @@ class UserController {
       return res.json({ id, name, email });
     } catch (e) {
       console.log(e);
-      return res.status(400).json(e);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 
   async getAll(req, res) {
     try {
       const users = await User.findAll({ attributes: ['id', 'name', 'email'] });
-
       return res.json(users);
     } catch (e) {
       console.log(e);
-      return res.status(400).json(e);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 
@@ -28,9 +31,9 @@ class UserController {
     try {
       const { id } = req.params;
       const user = await User.findByPk(id);
-      if(!user) {
+      if (!user) {
         return res.status(400).json({
-          errors: [ 'User not found.' ]
+          errors: ['User not found.'],
         });
       }
 
@@ -38,22 +41,24 @@ class UserController {
       return res.json({ id, name, email });
     } catch (e) {
       console.log(e);
-      return res.status(400).json(e);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 
   async update(req, res) {
     try {
-      if(!req.userId) {
+      if (!req.userId) {
         return res.status(400).json({
-          errors: [ 'Id invalid.' ]
+          errors: ['Id invalid.'],
         });
       }
 
       const user = await User.findByPk(req.userId);
-      if(!user) {
+      if (!user) {
         return res.status(400).json({
-          errors: [ 'User not found.' ]
+          errors: ['User not found.'],
         });
       }
 
@@ -62,22 +67,24 @@ class UserController {
       return res.json({ id, name, email });
     } catch (e) {
       console.log(e);
-      return res.status(400).json(e);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 
   async delete(req, res) {
     try {
-      if(!req.userId) {
+      if (!req.userId) {
         return res.status(400).json({
-          errors: [ 'Id invalid.' ]
+          errors: ['Id invalid.'],
         });
       }
 
       const user = await User.findByPk(req.userId);
-      if(!user) {
+      if (!user) {
         return res.status(400).json({
-          errors: [ 'User not found.' ]
+          errors: ['User not found.'],
         });
       }
 
@@ -85,7 +92,9 @@ class UserController {
       return res.json({ deleted: true });
     } catch (e) {
       console.log(e);
-      return res.status(400).json(e);
+      return res.status(400).json({
+        errors: e.errors.map((err) => err.message),
+      });
     }
   }
 }

@@ -9,9 +9,9 @@ export default class Student extends Model {
         validate: {
           len: {
             args: [3, 60],
-            msg: 'Name need to have between 3 and 60 characters.'
-          }
-        }
+            msg: 'Name need to have between 3 and 60 characters.',
+          },
+        },
       },
       lastName: {
         type: Sequelize.STRING,
@@ -19,51 +19,51 @@ export default class Student extends Model {
         validate: {
           len: {
             args: [3, 60],
-            msg: 'Name need to have between 3 and 60 characters.'
-          }
-        }
+            msg: 'Name need to have between 3 and 60 characters.',
+          },
+        },
       },
       email: {
         type: Sequelize.STRING,
         defaultValue: '',
         unique: {
-          msg: 'Email already exists.'
+          msg: 'Email already exists.',
         },
         validate: {
           isEmail: {
-            msg: 'Email invalid.'
-          }
-        }
+            msg: 'Email invalid.',
+          },
+        },
       },
       age: {
         type: Sequelize.INTEGER,
         defaultValue: '',
         validate: {
           isInt: {
-            msg: 'Age must be an integer number.'
-          }
-        }
+            msg: 'Age must be an integer number.',
+          },
+        },
       },
       weight: {
         type: Sequelize.FLOAT,
         defaultValue: '',
         validate: {
           isFloat: {
-            msg: 'Weight must be an integer or float number.'
-          }
-        }
+            msg: 'Weight must be an integer or float number.',
+          },
+        },
       },
       height: {
         type: Sequelize.FLOAT,
         defaultValue: '',
         validate: {
           isFloat: {
-            msg: 'Weight must be an integer or float number.'
-          }
-        }
+            msg: 'Weight must be an integer or float number.',
+          },
+        },
       },
     }, {
-      sequelize
+      sequelize,
     });
     return this;
   }
