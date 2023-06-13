@@ -40,14 +40,14 @@ class UserController {
       const { id } = req.params;
 
       if(!id) {
-        return res.status(401).json({
+        return res.status(400).json({
           errors: [ 'Id invalid.' ]
         });
       }
 
       const user = await User.findByPk(id);
       if(!user) {
-        return res.status(401).json({
+        return res.status(400).json({
           errors: [ 'User not found.' ]
         });
       }
@@ -67,14 +67,14 @@ class UserController {
       const { id } = req.params;
 
       if(!id) {
-        return res.status(401).json({
+        return res.status(400).json({
           errors: [ 'Id invalid.' ]
         });
       }
 
       const user = await User.findByPk(id);
       if(!user) {
-        return res.status(401).json({
+        return res.status(400).json({
           errors: [ 'User not found.' ]
         });
       }
