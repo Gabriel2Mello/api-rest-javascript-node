@@ -22,11 +22,17 @@ class PictureController {
         });
       }
 
-      const { originalname, filename } = req.file;
-      const { studentId } = req.body;
-      const picture = await Picture.create({ originalname, filename, studentId });
+      try {
+        const { originalname, filename } = req.file;
+        const { studentId } = req.body;
+        const picture = await Picture.create({ originalname, filename, studentId });
 
-      return res.json(picture);
+        return res.json(picture);
+      } catch (e) {
+        return res.status(400).json({
+          errors: ['Student not found.'],
+        });
+      }
     });
   }
 }

@@ -1,9 +1,17 @@
 import Student from '../models/Student';
+import Picture from '../models/Picture';
 
 class StudentController {
   async getAll(req, res) {
     try {
-      const students = await Student.findAll();
+      const students = await Student.findAll({
+        order: [['id', 'DESC'], [Picture, 'id', 'DESC']],
+        include: {
+          model: Picture,
+          attributes: ['id', 'url', 'filename'],
+        },
+      });
+
       res.json(students);
     } catch (e) {
       console.log(e);
@@ -34,7 +42,13 @@ class StudentController {
         });
       }
 
-      const student = await Student.findByPk(id);
+      const student = await Student.findByPk(id, {
+        order: [['id', 'DESC'], [Picture, 'id', 'DESC']],
+        include: {
+          model: Picture,
+          attributes: ['id', 'url', 'filename'],
+        },
+      });
       if (!student) {
         return res.status(400).json({
           errors: ['Student not found.'],
