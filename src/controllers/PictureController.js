@@ -1,9 +1,9 @@
-import multer from 'multer';
-import multerConfig from '../config/multer';
+import multer from "multer";
+import multerConfig from "../config/multer";
 
-import Picture from '../models/Picture';
+import Picture from "../models/Picture";
 
-const upload = multer(multerConfig).single('picture');
+const upload = multer(multerConfig).single("picture");
 
 class PictureController {
   store(req, res) {
@@ -25,12 +25,16 @@ class PictureController {
       try {
         const { originalname, filename } = req.file;
         const { studentId } = req.body;
-        const picture = await Picture.create({ originalname, filename, studentId });
+        const picture = await Picture.create({
+          originalname,
+          filename,
+          studentId,
+        });
 
         return res.json(picture);
       } catch (e) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
     });
