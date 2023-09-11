@@ -1,4 +1,4 @@
-import User from '../models/User';
+import User from "../models/User";
 
 class UserController {
   async create(req, res) {
@@ -17,7 +17,7 @@ class UserController {
 
   async getAll(req, res) {
     try {
-      const users = await User.findAll({ attributes: ['id', 'name', 'email'] });
+      const users = await User.findAll({ attributes: ["id", "name", "email"] });
       return res.json(users);
     } catch (e) {
       console.log(e);
@@ -33,7 +33,7 @@ class UserController {
       const user = await User.findByPk(id);
       if (!user) {
         return res.status(400).json({
-          errors: ['User not found.'],
+          errors: ["User not found."],
         });
       }
 
@@ -51,14 +51,14 @@ class UserController {
     try {
       if (!req.userId) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const user = await User.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
-          errors: ['User not found.'],
+          errors: ["User not found."],
         });
       }
 
@@ -77,14 +77,14 @@ class UserController {
     try {
       if (!req.userId) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const user = await User.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
-          errors: ['User not found.'],
+          errors: ["User not found."],
         });
       }
 

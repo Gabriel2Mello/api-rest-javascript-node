@@ -1,14 +1,24 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _Student = require('../models/Student'); var _Student2 = _interopRequireDefault(_Student);
-var _Picture = require('../models/Picture'); var _Picture2 = _interopRequireDefault(_Picture);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+var _Student = require("../models/Student");
+var _Student2 = _interopRequireDefault(_Student);
+var _Picture = require("../models/Picture");
+var _Picture2 = _interopRequireDefault(_Picture);
 
 class StudentController {
   async getAll(req, res) {
     try {
       const students = await _Student2.default.findAll({
-        order: [['id', 'DESC'], [_Picture2.default, 'id', 'DESC']],
+        order: [
+          ["id", "DESC"],
+          [_Picture2.default, "id", "DESC"],
+        ],
         include: {
           model: _Picture2.default,
-          attributes: ['id', 'url', 'filename'],
+          attributes: ["id", "url", "filename"],
         },
       });
 
@@ -16,7 +26,7 @@ class StudentController {
     } catch (e) {
       console.log(e);
       res.status(500).json({
-        errors: ['Internal server error'],
+        errors: ["Internal server error"],
       });
     }
   }
@@ -38,20 +48,23 @@ class StudentController {
       const { id } = req.params;
       if (!id) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const student = await _Student2.default.findByPk(id, {
-        order: [['id', 'DESC'], [_Picture2.default, 'id', 'DESC']],
+        order: [
+          ["id", "DESC"],
+          [_Picture2.default, "id", "DESC"],
+        ],
         include: {
           model: _Picture2.default,
-          attributes: ['id', 'url', 'filename'],
+          attributes: ["id", "url", "filename"],
         },
       });
       if (!student) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
 
@@ -69,14 +82,14 @@ class StudentController {
       const { id } = req.params;
       if (!id) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const student = await _Student2.default.findByPk(id);
       if (!student) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
 
@@ -95,14 +108,14 @@ class StudentController {
       const { id } = req.params;
       if (!id) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const student = await _Student2.default.findByPk(id);
       if (!student) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
 
@@ -119,4 +132,4 @@ class StudentController {
   }
 }
 
-exports. default = new StudentController();
+exports.default = new StudentController();

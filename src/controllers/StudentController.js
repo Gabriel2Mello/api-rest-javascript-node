@@ -1,14 +1,17 @@
-import Student from '../models/Student';
-import Picture from '../models/Picture';
+import Student from "../models/Student";
+import Picture from "../models/Picture";
 
 class StudentController {
   async getAll(req, res) {
     try {
       const students = await Student.findAll({
-        order: [['id', 'DESC'], [Picture, 'id', 'DESC']],
+        order: [
+          ["id", "DESC"],
+          [Picture, "id", "DESC"],
+        ],
         include: {
           model: Picture,
-          attributes: ['id', 'url', 'filename'],
+          attributes: ["id", "url", "filename"],
         },
       });
 
@@ -16,7 +19,7 @@ class StudentController {
     } catch (e) {
       console.log(e);
       res.status(500).json({
-        errors: ['Internal server error'],
+        errors: ["Internal server error"],
       });
     }
   }
@@ -38,20 +41,23 @@ class StudentController {
       const { id } = req.params;
       if (!id) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const student = await Student.findByPk(id, {
-        order: [['id', 'DESC'], [Picture, 'id', 'DESC']],
+        order: [
+          ["id", "DESC"],
+          [Picture, "id", "DESC"],
+        ],
         include: {
           model: Picture,
-          attributes: ['id', 'url', 'filename'],
+          attributes: ["id", "url", "filename"],
         },
       });
       if (!student) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
 
@@ -69,14 +75,14 @@ class StudentController {
       const { id } = req.params;
       if (!id) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const student = await Student.findByPk(id);
       if (!student) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
 
@@ -95,14 +101,14 @@ class StudentController {
       const { id } = req.params;
       if (!id) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const student = await Student.findByPk(id);
       if (!student) {
         return res.status(400).json({
-          errors: ['Student not found.'],
+          errors: ["Student not found."],
         });
       }
 

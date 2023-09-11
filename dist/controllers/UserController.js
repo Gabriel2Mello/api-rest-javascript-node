@@ -1,4 +1,10 @@
-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _User = require('../models/User'); var _User2 = _interopRequireDefault(_User);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
+var _User = require("../models/User");
+var _User2 = _interopRequireDefault(_User);
 
 class UserController {
   async create(req, res) {
@@ -17,7 +23,9 @@ class UserController {
 
   async getAll(req, res) {
     try {
-      const users = await _User2.default.findAll({ attributes: ['id', 'name', 'email'] });
+      const users = await _User2.default.findAll({
+        attributes: ["id", "name", "email"],
+      });
       return res.json(users);
     } catch (e) {
       console.log(e);
@@ -33,7 +41,7 @@ class UserController {
       const user = await _User2.default.findByPk(id);
       if (!user) {
         return res.status(400).json({
-          errors: ['User not found.'],
+          errors: ["User not found."],
         });
       }
 
@@ -51,14 +59,14 @@ class UserController {
     try {
       if (!req.userId) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const user = await _User2.default.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
-          errors: ['User not found.'],
+          errors: ["User not found."],
         });
       }
 
@@ -77,14 +85,14 @@ class UserController {
     try {
       if (!req.userId) {
         return res.status(400).json({
-          errors: ['Id invalid.'],
+          errors: ["Id invalid."],
         });
       }
 
       const user = await _User2.default.findByPk(req.userId);
       if (!user) {
         return res.status(400).json({
-          errors: ['User not found.'],
+          errors: ["User not found."],
         });
       }
 
@@ -99,4 +107,4 @@ class UserController {
   }
 }
 
-exports. default = new UserController();
+exports.default = new UserController();
